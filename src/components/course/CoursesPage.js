@@ -12,7 +12,7 @@ class CoursesPage extends React.Component {
   }
 
 
-  courseRow(course, index) {
+  onNumRowsChange(course, index) {
     return <div key={index}>{course.title}</div>;
   }
 
@@ -22,7 +22,7 @@ class CoursesPage extends React.Component {
 
 
   render() {
-    const {courses} = this.props;
+    const {courses, numRows} = this.props;
 
     return (
       <div>
@@ -31,7 +31,7 @@ class CoursesPage extends React.Component {
                value="Add Course"
                className="btn btn-primary"
                onClick={this.redirectToAddCoursePage}/>
-       <CourseList courses={courses}/>
+       <CourseList courses={courses} numRows={numRows} onNumRowsChange={onNumRowsChange}/>
       </div>
     );
   }
@@ -39,12 +39,14 @@ class CoursesPage extends React.Component {
 
 CoursesPage.propTypes = {
   courses: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
+  numRows: PropTypes.number.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
    return {
-     courses: state.courses
+     courses: state.courses,
+     numRows: state.numRows
    };
 }
 
